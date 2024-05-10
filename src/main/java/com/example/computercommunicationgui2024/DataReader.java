@@ -19,8 +19,8 @@ public class DataReader implements Runnable {
                 inData.put(inMessage1);
             } catch (IOException ioex) {
                 // its ok to get IOException when there is no object to read in from ObjectInputStream
-            } catch (Exception ex) {
-                System.out.println("Ooops DataReader broke: " + ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }

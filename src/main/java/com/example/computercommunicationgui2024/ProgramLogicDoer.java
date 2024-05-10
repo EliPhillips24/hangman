@@ -1,5 +1,7 @@
 package com.example.computercommunicationgui2024;
 
+import javafx.application.Platform;
+
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,14 +29,20 @@ public class ProgramLogicDoer implements Runnable {
             if (inMessage1 != null) {
                 if (theController != null) {
                     // add the message to your JavaFX Control that displays many messages
-                    theController.allMessages.getItems().add(inMessage1);
+                    Object finalInMessage = inMessage1;
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            theController.allMessages.getItems().add(finalInMessage);
+                        }
+                    });
                 } else {
                     System.out.println(inMessage1);
                 }
                 try {
                     if (serverMode) {
                         for (ObjectOutputStream eachOut: manyOuts) {
-                            eachOut.writeObject("Mr. H overheard: " + inMessage1);
+                            eachOut.writeObject("Someone said: " + inMessage1);
                         }
                     }
                 } catch (Exception ex) {

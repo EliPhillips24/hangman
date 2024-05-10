@@ -37,17 +37,12 @@ public class ServerSocketConnector implements Runnable {
 
                 DataReader myDataReader = new DataReader(objIn, queue);
                 ProgramLogicDoer myProgramLogicDoer = new ProgramLogicDoer(queue, objOut, null, true);
-
                 Thread dataReadThread = new Thread(myDataReader);
                 Thread programLogicThread = new Thread(myProgramLogicDoer);
-
                 dataReadThread.start();
                 programLogicThread.start();
 
-                objOut.writeObject("Mr. Hernandez says: HI! :-)");
-                objOut.writeObject("Mr. Hernandez says: Glad you can read more than 1 message from me!");
-                objOut.writeObject("Mr. Hernandez says: Get ready to read MANY messages from EVERYONE!");
-
+                objOut.writeObject("Mr. Hernandez says: Welcome to our chat!  Send and receive messages TO and FROM everyone.");
             } catch (Exception ex) {
                 System.out.println("Server connection failed: "+ ex);
             }
