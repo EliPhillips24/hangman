@@ -16,7 +16,13 @@ public class DataReader implements Runnable {
     public void run()  {
         while (true) {
             try {
-                CommunicationData inMessage1 = (CommunicationData)client.getObjIn().readObject();
+                Object inObject = client.getObjIn().readObject();
+                CommunicationData inMessage1;
+                if (inObject instanceof CommunicationData) {
+                    inMessage1 = (CommunicationData) inObject;
+                } else {
+                    inMessage1 = new CommunicationData("WHU?", "ALL", "BAD DATA: " + inObject, 0);
+                }
 
                 InetAddress fromIPAddress = client.getActualSocket().getInetAddress();
                 inMessage1.setFromIPAddress(fromIPAddress);

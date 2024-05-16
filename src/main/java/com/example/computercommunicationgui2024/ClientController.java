@@ -27,7 +27,7 @@ public class ClientController extends ClientServerController {
         messageColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("message"));
 
         System.out.println("Connecting to my server");
-        Socket newSocket = new Socket("192.168.5.165",3256);
+        Socket newSocket = new Socket("10.37.157.240",3256);
         queue = new MyCoolDataStructure();
         serverConnection = new ClientConnection(newSocket);
         DataReader myDataReader = new DataReader(serverConnection, queue);
