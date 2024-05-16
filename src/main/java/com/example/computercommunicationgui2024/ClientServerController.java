@@ -1,5 +1,6 @@
 package com.example.computercommunicationgui2024;
 
+import com.example.CommunicationData;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 

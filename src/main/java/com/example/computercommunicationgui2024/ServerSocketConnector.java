@@ -1,8 +1,8 @@
 package com.example.computercommunicationgui2024;
 
+import com.example.CommunicationData;
 import javafx.application.Platform;
 
-import javax.crypto.Cipher;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;

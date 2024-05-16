@@ -1,5 +1,7 @@
 package com.example.computercommunicationgui2024;
 
+import com.example.CommunicationData;
+
 public class MyCoolDataStructure {
     CommunicationData[] data = new CommunicationData[100];
     // field for next put location

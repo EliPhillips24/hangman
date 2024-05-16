@@ -1,13 +1,10 @@
 package com.example.computercommunicationgui2024;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import com.example.CommunicationData;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.net.ServerSocket;
 
 public class ServerController extends ClientServerController {
 

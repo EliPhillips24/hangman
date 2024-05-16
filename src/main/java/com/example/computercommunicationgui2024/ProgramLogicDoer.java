@@ -1,10 +1,9 @@
 package com.example.computercommunicationgui2024;
 
+import com.example.CommunicationData;
 import javafx.application.Platform;
 
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ProgramLogicDoer implements Runnable {
     MyCoolDataStructure inData;

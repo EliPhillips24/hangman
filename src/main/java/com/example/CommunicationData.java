@@ -1,4 +1,4 @@
-package com.example.computercommunicationgui2024;
+package com.example;
 
 import java.io.Serializable;
 import java.net.InetAddress;
