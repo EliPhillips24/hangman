@@ -7,29 +7,29 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProgramLogicDoer implements Runnable {
-
     MyCoolDataStructure inData;
-    ObjectOutputStream objOut;
     boolean serverMode;
-    ClientController theController;
+    ClientServerController theController;
 
-    static ArrayList<ObjectOutputStream> manyOuts = new ArrayList<ObjectOutputStream>();
+    ArrayList<ClientConnection> manyClients = new ArrayList<ClientConnection>();
 
-    public ProgramLogicDoer(MyCoolDataStructure inData,ObjectOutputStream objOut, ClientController theController, boolean serverMode)  {
+    public ProgramLogicDoer(MyCoolDataStructure inData, ClientServerController theController, boolean serverMode)  {
         this.inData = inData;
-        this.objOut = objOut;
-        manyOuts.add(objOut);
         this.theController = theController;
         this.serverMode = serverMode;
     }
 
+    public void addSocket(ClientConnection newClient) {
+        manyClients.add(newClient);
+    }
+
     public void run() {
-        Object inMessage1 = inData.get();
+        CommunicationData inMessage1 = inData.get();
         while (true) {
             if (inMessage1 != null) {
                 if (theController != null) {
                     // add the message to your JavaFX Control that displays many messages
-                    Object finalInMessage = inMessage1;
+                    CommunicationData finalInMessage = inMessage1;
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -37,12 +37,26 @@ public class ProgramLogicDoer implements Runnable {
                         }
                     });
                 } else {
-                    System.out.println(inMessage1);
+                    System.out.println("ProgramLogicDoer got: " + inMessage1);
                 }
                 try {
                     if (serverMode) {
-                        for (ObjectOutputStream eachOut: manyOuts) {
-                            eachOut.writeObject("Someone said: " + inMessage1);
+                        if (inMessage1.getMessage().equalsIgnoreCase("ID") &&
+                                inMessage1.getTo().equalsIgnoreCase("SERVER")) {
+                            String clientName = inMessage1.getFrom();
+                            for (ClientConnection aClient: manyClients) {
+                                if (inMessage1.getFromIPAddress().equalsIgnoreCase(aClient.getActualSocket().getInetAddress().getHostAddress())) {
+                                    System.out.println("ProgramLogicDoer registered: " + clientName + " to IP" + aClient);
+                                    aClient.setName(clientName);
+                                }
+                            }
+                        }
+                        for (ClientConnection aClient: manyClients) {
+                            if (inMessage1.getTo().equalsIgnoreCase("ALL") ||
+                                    inMessage1.getTo().equalsIgnoreCase(aClient.getName())) {
+                                System.out.println("ProgramLogicDoer relayed to: " + aClient + " message: " + inMessage1);
+                                aClient.getObjOut().writeObject(inMessage1);
+                            }
                         }
                     }
                 } catch (Exception ex) {

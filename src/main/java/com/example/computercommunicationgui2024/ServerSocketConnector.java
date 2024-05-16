@@ -1,19 +1,24 @@
 package com.example.computercommunicationgui2024;
 
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import javafx.application.Platform;
+
+import javax.crypto.Cipher;
+import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSocketConnector implements Runnable {
     MyCoolDataStructure queue;
     Socket actualSocket;
-    int clientCount;
+    ServerController theController;
+    int port = 3256;
+
+    public ServerSocketConnector(ServerController theController) {
+        this.theController = theController;
+    }
 
     public void run() {
-        queue = new MyCoolDataStructure();
         ServerSocket mySocket;
         try {
             mySocket = new ServerSocket(3256);
@@ -22,27 +27,54 @@ public class ServerSocketConnector implements Runnable {
             return;
         }
 
+        Socket socket = new Socket();
+        try {
+            socket.connect(new InetSocketAddress("google.com", 80));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Server socket at IP " + socket.getLocalAddress() + " port 3256");
+        System.out.println("... waiting for connectionSSS");
+
+        if (theController != null) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    theController.serverIP.setText(socket.getLocalAddress().getHostAddress());
+                    theController.serverPort.setText(String.valueOf(port));
+                }
+            });
+        }
+
+        queue = new MyCoolDataStructure();
+
+        ProgramLogicDoer myProgramLogicDoer = new ProgramLogicDoer(queue, theController, true);
+        Thread programLogicThread = new Thread(myProgramLogicDoer);
+        programLogicThread.start();
+        
         while (true) {
             try {
-                System.out.println("Server socket at IP 10.37.157.240 port 3256");
-                System.out.println("... waiting for connectionSSS");
                 actualSocket = mySocket.accept();
-                clientCount = clientCount + 1;
-                System.out.println("Client #" + clientCount + " CONNECTED!");
+                System.out.println("Connected to " + actualSocket.getInetAddress());
 
-                OutputStream out = actualSocket.getOutputStream();
-                ObjectOutputStream objOut = new ObjectOutputStream(out);
-                InputStream in = actualSocket.getInputStream();
-                ObjectInputStream objIn = new ObjectInputStream(in);
+                ClientConnection newClient = new ClientConnection(actualSocket);
+                myProgramLogicDoer.addSocket(newClient);
+                if (theController != null) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            theController.clients.getItems().add(newClient);
+                        }
+                    });
+                }
 
-                DataReader myDataReader = new DataReader(objIn, queue);
-                ProgramLogicDoer myProgramLogicDoer = new ProgramLogicDoer(queue, objOut, null, true);
+                DataReader myDataReader = new DataReader(newClient, queue);
                 Thread dataReadThread = new Thread(myDataReader);
-                Thread programLogicThread = new Thread(myProgramLogicDoer);
                 dataReadThread.start();
-                programLogicThread.start();
 
-                objOut.writeObject("Mr. Hernandez says: Welcome to our chat!  Send and receive messages TO and FROM everyone.");
+                CommunicationData data1 = new CommunicationData(null,null,"HIIII", 0);
+                newClient.getObjOut().writeObject(data1);
+                System.out.println("ServerSocketConnector wrote: " + data1);
             } catch (Exception ex) {
                 System.out.println("Server connection failed: "+ ex);
             }

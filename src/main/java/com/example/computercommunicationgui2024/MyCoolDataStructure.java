@@ -1,7 +1,7 @@
 package com.example.computercommunicationgui2024;
 
 public class MyCoolDataStructure {
-    Object[] data = new Object[100];
+    CommunicationData[] data = new CommunicationData[100];
     // field for next put location
     int nextPut = 0;
     // field for next get location
@@ -9,7 +9,7 @@ public class MyCoolDataStructure {
     // field for space used
     int dataUsed = 0;
 
-    public synchronized boolean put(Object obj) {
+    public synchronized boolean put(CommunicationData obj) {
         if (dataUsed < 100) {
             dataUsed = dataUsed + 1;
             data[nextPut] = obj;
@@ -25,9 +25,9 @@ public class MyCoolDataStructure {
     }
 
     // Methods
-    public synchronized Object get() {
+    public synchronized CommunicationData get() {
         if (dataUsed > 0) {
-            Object value = data[nextGet];
+            CommunicationData value = data[nextGet];
             dataUsed = dataUsed - 1;
             if (nextGet < 99)  {
                 nextGet = nextGet + 1;

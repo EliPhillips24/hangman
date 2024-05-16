@@ -1,10 +1,12 @@
 package com.example.computercommunicationgui2024;
 
 public class Server {
+    static ServerSocketConnector connector;
+    static Thread connectorThread;
 
     public static void main(String[] args) throws Exception {
-        ServerSocketConnector connector = new ServerSocketConnector();
-        Thread connectorThread = new Thread(connector);
+        connector = new ServerSocketConnector(null);
+        connectorThread = new Thread(connector);
         connectorThread.start();
     }
 }

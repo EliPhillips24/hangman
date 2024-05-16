@@ -12,20 +12,20 @@ public class Client {
 
         // Controller.initialize()
         System.out.println("Connecting to my server");
-        Socket newSocket = new Socket("127.0.0.1",3256);
-        OutputStream out = newSocket.getOutputStream();
-        ObjectOutputStream objOut = new ObjectOutputStream(out);
-        InputStream in = newSocket.getInputStream();
-        ObjectInputStream objIn = new ObjectInputStream(in);
+        Socket newSocket = new Socket("192.168.5.165",3256);
         queue = new MyCoolDataStructure();
-        DataReader myDataReader = new DataReader(objIn, queue);
-        ProgramLogicDoer myProgramLogicDoer = new ProgramLogicDoer(queue, objOut, null, false);
+        ClientConnection newClient = new ClientConnection(newSocket);
+
+        DataReader myDataReader = new DataReader(newClient, queue);
+        ProgramLogicDoer myProgramLogicDoer = new ProgramLogicDoer(queue,null,false);
         Thread dataReadThread = new Thread(myDataReader);
         Thread programLogicThread = new Thread(myProgramLogicDoer);
         dataReadThread.start();
         programLogicThread.start();
 
         // Controller.sendMessage()  onAction
-        objOut.writeObject("HIIII");
+        CommunicationData data1 = new CommunicationData(null,null,"HIIII", 0);
+        newClient.getObjOut().writeObject(data1);
+        System.out.println("Client wrote: " + data1);
     }
 }
