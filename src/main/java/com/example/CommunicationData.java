@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 
 public class CommunicationData implements Serializable {
-    private static final long serialVersionUID = 1234567890;
+    private static final long serialVersionUID = 1234567890L;
 
     String from;
     String to;
