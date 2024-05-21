@@ -28,7 +28,7 @@ public class DataReader implements Runnable {
                 InetAddress fromIPAddress = client.getActualSocket().getInetAddress();
                 inMessage1.setFromIPAddress(fromIPAddress);
                 inData.put(inMessage1);
-                System.out.println("DataReader read: " + inMessage1);
+                //System.out.println("DataReader read: " + inMessage1);
             } catch (IOException ioex) {
                 // its ok to get IOException when there is no object to read in from ObjectInputStream
             } catch (ClassNotFoundException ex) {

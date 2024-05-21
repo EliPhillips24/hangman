@@ -32,34 +32,51 @@ public class ProgramLogicDoer implements Runnable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            theController.allMessages.getItems().add(finalInMessage);
+                            if (serverMode) {
+                                if (finalInMessage.getTo().equalsIgnoreCase("ALL") ||
+                                        finalInMessage.getTo().equalsIgnoreCase("SERVER")) {
+                                    theController.allMessages.getItems().add(finalInMessage);
+                                } else {
+                                    CommunicationData privateMessage = new CommunicationData(finalInMessage.getFrom(),
+                                            finalInMessage.getTo(), "PRIVATE",0);
+                                    privateMessage.setFromIPAddress(finalInMessage.getFromIPAddress());
+                                    theController.allMessages.getItems().add(privateMessage);
+                                }
+                            } else {
+                                theController.allMessages.getItems().add(finalInMessage);
+                            }
                         }
                     });
                 } else {
                     System.out.println("ProgramLogicDoer got: " + inMessage1);
                 }
-                try {
-                    if (serverMode) {
+                if (serverMode) {
+                    try {
                         if (inMessage1.getMessage().equalsIgnoreCase("ID") &&
                                 inMessage1.getTo().equalsIgnoreCase("SERVER")) {
                             String clientName = inMessage1.getFrom();
-                            for (ClientConnection aClient: manyClients) {
+                            for (ClientConnection aClient : manyClients) {
                                 if (inMessage1.getFromIPAddress().equalsIgnoreCase(aClient.getActualSocket().getInetAddress().getHostAddress())) {
                                     System.out.println("ProgramLogicDoer registered: " + clientName + " to IP" + aClient);
                                     aClient.setName(clientName);
+                                    CommunicationData newClientMessage = new CommunicationData(clientName, "ALL", "NEW CLIENT", 0);
+                                    aClient.getObjOut().writeObject(newClientMessage);
                                 }
                             }
                         }
-                        for (ClientConnection aClient: manyClients) {
-                            if (inMessage1.getTo().equalsIgnoreCase("ALL") ||
-                                    inMessage1.getTo().equalsIgnoreCase(aClient.getName())) {
-                                System.out.println("ProgramLogicDoer relayed to: " + aClient + " message: " + inMessage1);
+                        for (ClientConnection aClient : manyClients) {
+                            if (inMessage1.getTo().equalsIgnoreCase("ALL")) {
+                                System.out.println("ProgramLogicDoer ALL to: " + aClient.getName() + " message: " + inMessage1);
+                                aClient.getObjOut().writeObject(inMessage1);
+                            } else if (inMessage1.getTo().equalsIgnoreCase(aClient.getName())) {
+                                System.out.println("ProgramLogicDoer private from" + inMessage1.getFrom() + "to: " + aClient.getName());
                                 aClient.getObjOut().writeObject(inMessage1);
                             }
                         }
+
+                    } catch (Exception ex) {
+                        System.out.println("ProgramLogicDoer server: " + ex);
                     }
-                } catch (Exception ex) {
-                    System.out.println(ex);
                 }
             }
             inMessage1 = inData.get();

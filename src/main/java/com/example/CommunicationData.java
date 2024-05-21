@@ -58,9 +58,12 @@ public class CommunicationData implements Serializable {
     public void setFromIPAddress(InetAddress fromIPAddress) {
         this.fromIPAddress = fromIPAddress.getHostAddress();
     }
+    public void setFromIPAddress(String fromIPAddress) {
+        this.fromIPAddress = fromIPAddress;
+    }
 
     public String toString() {
-        return "Message: \"" + message + " from: " + from + fromIPAddress + " to:" + to;
+        return "Message from: " + from + ":" + fromIPAddress + " to: " + to + " \"" + message + "\'";
     }
 
 }

@@ -57,6 +57,7 @@ public class ServerSocketConnector implements Runnable {
                 actualSocket = mySocket.accept();
                 System.out.println("Connected to " + actualSocket.getInetAddress());
 
+                theController.clients.refresh();
                 ClientConnection newClient = new ClientConnection(actualSocket);
                 myProgramLogicDoer.addSocket(newClient);
                 if (theController != null) {
@@ -71,10 +72,6 @@ public class ServerSocketConnector implements Runnable {
                 DataReader myDataReader = new DataReader(newClient, queue);
                 Thread dataReadThread = new Thread(myDataReader);
                 dataReadThread.start();
-
-                CommunicationData data1 = new CommunicationData(null,null,"HIIII", 0);
-                newClient.getObjOut().writeObject(data1);
-                System.out.println("ServerSocketConnector wrote: " + data1);
             } catch (Exception ex) {
                 System.out.println("Server connection failed: "+ ex);
             }
