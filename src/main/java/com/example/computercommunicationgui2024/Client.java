@@ -10,7 +10,9 @@ public class Client {
 
         // Controller.initialize()
         System.out.println("Connecting to my server");
-        Socket newSocket = new Socket("192.168.5.165",3256);
+        Socket newSocket = new Socket("10.37.153.179",3256);
+
+        //my ip is 10.37.153.179
         queue = new MyCoolDataStructure();
         ClientConnection newClient = new ClientConnection(newSocket);
 
