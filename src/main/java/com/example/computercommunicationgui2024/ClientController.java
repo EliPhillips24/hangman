@@ -31,7 +31,7 @@ public class ClientController extends ClientServerController {
         dataReadThread.start();
         programLogicThread.start();
 
-        CommunicationData identity = new CommunicationData("Victor","SERVER","ID", 0);
+        CommunicationData identity = new CommunicationData("Jaden","SERVER","ID", 0);
         serverConnection.getObjOut().writeObject(identity);
         System.out.println("ClientController initialize() wrote: " + identity);
     }
@@ -41,4 +41,7 @@ public class ClientController extends ClientServerController {
         serverConnection.getObjOut().writeObject(data1);
         System.out.println("ClientController sendMessage() wrote: " + data1);
     }
+    //public void contains;
+    //System.out.println(myStr.contains("Hel"));   // true
+    //System.out.println(myStr.contains("Hel"));   // true
 }
