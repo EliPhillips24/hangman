@@ -29,7 +29,27 @@ public class ServerController extends ClientServerController {
 
     public String FinalWord;
 
+    public  int Score;
+
+
+
+    //This is for head body kees and toes
+
+    public TextField Head;
+    public TextField Body;
+    public TextField LeftArm;
+    public TextField RightArm;
+    public TextField LeftLeg;
+    public TextField RightLeg;
+
+public  TextField Win;
+
+
+
+
     public void initialize() {
+        Score = -1;
+
         clientIPsColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("clientIP"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("name"));
 
@@ -43,12 +63,44 @@ public class ServerController extends ClientServerController {
         connectorThread.start();
     }
     public void doHangmanLogic(String lastMessage) {
-        System.out.println("lastMessage" + lastMessage);
 
 if(Word.getText().contains(lastMessage)){
-System.out.println("Message");
+
+System.out.println("Message" + lastMessage  );
+
 }else{
-    System.out.println("Not Message");
+    System.out.println("Not Message" + lastMessage);
+Score = Score +1;
+
+if(Score == 1){
+    Head.setText("0");
+}
+if(Score == 2){
+    Body.setText("|");
+}
+if(Score == 3){
+    LeftArm.setText("/");
+}
+if(Score == 4){
+    RightArm.setText("_");
+}
+if(Score == 5){
+    LeftLeg.setText("/");
+}
+if(Score == 6){
+    RightLeg.setText("|");
+}
+    if(Score == 7){
+System.out.println("you Lost");
+Win.setText("You lost");
+Head.setText("");
+Body.setText("");
+LeftArm.setText("");
+RightArm.setText("");
+LeftLeg.setText("");
+RightLeg.setText("");
+Score = 0;
+    }
 
 }
     }
@@ -57,6 +109,5 @@ public void setWord() {
 System.out.println("FinalWord"+ FinalWord);
 
 }
-
 
     }
