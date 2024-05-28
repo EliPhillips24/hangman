@@ -9,5 +9,6 @@ public class ClientServerController {
     public TableColumn<CommunicationData, String> IPColumn;
     public TableColumn<CommunicationData, String> fromColumn;
     public TableColumn<CommunicationData, String> toColumn;
+    //m
     public TableColumn<CommunicationData, String> messageColumn;
 }
