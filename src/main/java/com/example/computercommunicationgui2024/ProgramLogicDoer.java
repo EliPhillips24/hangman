@@ -42,6 +42,8 @@ public class ProgramLogicDoer implements Runnable {
                                     privateMessage.setFromIPAddress(finalInMessage.getFromIPAddress());
                                     theController.allMessages.getItems().add(privateMessage);
                                 }
+                                ServerController serverC = (ServerController)theController;
+                                serverC.doHangmanLogic(finalInMessage.getMessage());
                             } else {
                                 theController.allMessages.getItems().add(finalInMessage);
                             }

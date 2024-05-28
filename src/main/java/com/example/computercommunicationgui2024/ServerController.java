@@ -1,6 +1,7 @@
 package com.example.computercommunicationgui2024;
 
 import com.example.CommunicationData;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,6 +25,10 @@ public class ServerController extends ClientServerController {
     static ServerSocketConnector connector;
     static Thread connectorThread;
 
+    public PasswordField Word;
+
+    public String FinalWord;
+
     public void initialize() {
         clientIPsColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("clientIP"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("name"));
@@ -37,4 +42,21 @@ public class ServerController extends ClientServerController {
         connectorThread = new Thread(connector);
         connectorThread.start();
     }
+    public void doHangmanLogic(String lastMessage) {
+        System.out.println("lastMessage" + lastMessage);
+
+if(Word.getText().contains(lastMessage)){
+System.out.println("Message");
+}else{
+    System.out.println("Not Message");
+
 }
+    }
+public void setWord() {
+    FinalWord =  Word.getText();
+System.out.println("FinalWord"+ FinalWord);
+
+}
+
+
+    }
