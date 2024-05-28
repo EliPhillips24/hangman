@@ -3,6 +3,8 @@ package com.example.computercommunicationgui2024;
 import com.example.CommunicationData;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 import java.net.Socket;
 
@@ -10,6 +12,18 @@ public class ClientController extends ClientServerController {
     public TextField From;
     public TextField To;
     public TextField messageTyped;
+
+    public Circle manHead;
+
+    public Line leftArm;
+
+    public Line rightArm;
+
+    public Line manTorso;
+
+    public Line leftLeg;
+
+    public Line rightLeg;
 
     MyCoolDataStructure queue;
     ClientConnection serverConnection;
