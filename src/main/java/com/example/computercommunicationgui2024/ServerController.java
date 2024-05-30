@@ -7,6 +7,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ServerController extends ClientServerController {
 
     public TextField serverIP;
@@ -44,11 +47,20 @@ public class ServerController extends ClientServerController {
 
 public  TextField Win;
 
+    public  TextField goodWord;
+    public  TextField badWord;
 
+    public String BadChar;
+    public String GoodChar;
 
 
     public void initialize() {
-        Score = -1;
+        ArrayList<String> GoodWord = new ArrayList<String>();
+        ArrayList<String> BadWord = new ArrayList<String>();
+        GoodChar = " ";
+        BadChar = " ";
+
+        Score = 0;
 
         clientIPsColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("clientIP"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("name"));
@@ -64,13 +76,28 @@ public  TextField Win;
     }
     public void doHangmanLogic(String lastMessage) {
 
-if(Word.getText().contains(lastMessage)){
+        char firstCharWord = Word.getText().charAt(0);
+        char firstCharLastMessage = lastMessage.charAt(0);
 
-System.out.println("Message" + lastMessage  );
+        String firstChar = String.valueOf(firstCharLastMessage);
+
+        if (Word.getText().contains(firstChar)) {
+
+        GoodChar = GoodChar + firstChar + ",";
+
+        goodWord.setText(GoodChar);
+
+            if(Word.getText().equals(lastMessage)){
+                Win.setText("You Won");
+            }
 
 }else{
     System.out.println("Not Message" + lastMessage);
-Score = Score +1;
+//badword
+            BadChar = BadChar + firstChar + ",";
+
+            badWord.setText(BadChar);
+            Score = Score +1;
 
 if(Score == 1){
     Head.setText("0");
@@ -109,5 +136,21 @@ public void setWord() {
 System.out.println("FinalWord"+ FinalWord);
 
 }
+    public void reset() {
+        Head.setText("");
+        Body.setText("");
+        LeftArm.setText("");
+        RightArm.setText("");
+        LeftLeg.setText("");
+        RightLeg.setText("");
+        Score = 0;
+badWord.setText("");
+goodWord.setText("");
+Win.setText("Put In Your New Word");
+GoodChar = " ";
+BadChar = " ";
+    }
+
+
 
     }

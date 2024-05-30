@@ -13,26 +13,15 @@ public class ClientController extends ClientServerController {
     public TextField To;
     public TextField messageTyped;
 
-    public Circle manHead;
-
-    public Line leftArm;
-
-    public Line rightArm;
-
-    public Line manTorso;
-
-    public Line leftLeg;
-
-    public Line rightLeg;
 
     MyCoolDataStructure queue;
     ClientConnection serverConnection;
 
     public void initialize() throws Exception {
-        IPColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("fromIPAddress"));
-        fromColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("from"));
-        toColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("to"));
-        messageColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("message"));
+      //  IPColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("fromIPAddress"));
+       // fromColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("from"));
+      //  toColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("to"));
+      //  messageColumn.setCellValueFactory(new PropertyValueFactory<CommunicationData, String>("message"));
 
         System.out.println("Connecting to my server");
         //10.37.152.237
