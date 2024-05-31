@@ -7,17 +7,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computercommunicationgui2024.ServerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computercommunicationgui2024.ServerController">
    <children>
-      <TableView fx:id="clients" layoutX="21.0" layoutY="41.0" prefHeight="193.0" prefWidth="559.0">
+      <TableView fx:id="clients" layoutX="411.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0">
         <columns>
           <TableColumn fx:id="clientIPsColumn" prefWidth="123.0" text="IP" />
           <TableColumn fx:id="nameColumn" prefWidth="435.0" text="Name" />
         </columns>
       </TableView>
-      <TableView fx:id="allMessages" layoutX="21.0" layoutY="272.0" prefHeight="152.0" prefWidth="559.0">
+      <TableView fx:id="allMessages" layoutX="368.0" layoutY="15.0" prefHeight="0.0" prefWidth="0.0">
         <columns>
           <TableColumn fx:id="IPColumn" prefWidth="97.0" text="IP" />
           <TableColumn fx:id="fromColumn" prefWidth="74.0" text="From" />
@@ -25,36 +26,37 @@
             <TableColumn fx:id="messageColumn" prefWidth="299.0" text="Message" />
         </columns>
       </TableView>
-      <Label layoutX="21.0" layoutY="14.0" prefHeight="17.0" prefWidth="147.0" text="Connected Clients:" />
-      <Label layoutX="21.0" layoutY="247.0" prefHeight="17.0" prefWidth="147.0" text="Messages:" />
       <Label layoutX="293.0" layoutY="14.0" prefHeight="17.0" prefWidth="64.0" text="Server IP:" />
-      <TextField fx:id="serverIP" layoutX="348.0" layoutY="10.0" prefHeight="26.0" prefWidth="109.0" />
-      <TextField fx:id="serverPort" layoutX="524.0" layoutY="10.0" prefHeight="26.0" prefWidth="56.0" />
+      <TextField fx:id="serverIP" layoutX="348.0" layoutY="10.0" prefHeight="51.0" prefWidth="109.0" />
+      <TextField fx:id="serverPort" layoutX="524.0" layoutY="10.0" prefHeight="58.0" prefWidth="56.0" />
       <Label layoutX="486.0" layoutY="15.0" prefHeight="17.0" prefWidth="38.0" text="Port" />
-      <TextField fx:id="Head" editable="false" layoutX="268.0" layoutY="436.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="Body" editable="false" layoutX="268.0" layoutY="462.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="LeftArm" editable="false" layoutX="244.0" layoutY="462.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="RightArm" editable="false" layoutX="292.0" layoutY="462.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="LeftLeg" editable="false" layoutX="256.0" layoutY="488.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="RightLeg" layoutX="280.0" layoutY="488.0" prefHeight="26.0" prefWidth="24.0" />
-      <PasswordField fx:id="Word" layoutX="15.0" layoutY="475.0" />
-      <Button layoutX="41.0" layoutY="442.0" mnemonicParsing="false" onAction="#setWord" text="Chose Word" />
-      <TextField fx:id="Win" layoutX="220.0" layoutY="526.0" prefHeight="26.0" prefWidth="121.0" />
-      <TextField fx:id="goodWord" layoutX="316.0" layoutY="575.0" />
-      <Text layoutX="348.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good Letters" />
-      <TextField fx:id="badWord" layoutX="143.0" layoutY="575.0" />
-      <Text layoutX="187.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bad Letters" />
-      <Button layoutX="537.0" layoutY="616.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
-      <Text layoutX="21.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word So Far" />
-      <TextField fx:id="letter1" editable="false" layoutX="114.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter4" editable="false" layoutX="186.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter3" editable="false" layoutX="162.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter2" editable="false" layoutX="138.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter7" editable="false" layoutX="256.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter6" editable="false" layoutX="232.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter5" editable="false" layoutX="208.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter8" editable="false" layoutX="281.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <TextField fx:id="letter9" editable="false" layoutX="304.0" layoutY="616.0" prefHeight="26.0" prefWidth="24.0" />
-      <Text layoutX="52.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have The Word Be Less Than 10 Charters" wrappingWidth="85.3134765625" />
+      <TextField fx:id="Head" editable="false" layoutX="239.0" layoutY="68.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="Body" editable="false" layoutX="239.0" layoutY="94.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="LeftArm" editable="false" layoutX="215.0" layoutY="94.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="RightArm" editable="false" layoutX="263.0" layoutY="94.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="LeftLeg" editable="false" layoutX="227.0" layoutY="120.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="RightLeg" layoutX="251.0" layoutY="120.0" prefHeight="26.0" prefWidth="24.0" />
+      <PasswordField fx:id="Word" layoutX="14.0" layoutY="48.0" />
+      <Button layoutX="40.0" layoutY="15.0" mnemonicParsing="false" onAction="#setWord" text="Chose Your Word" />
+      <TextField fx:id="Win" layoutX="185.0" layoutY="155.0" prefHeight="26.0" prefWidth="185.0" />
+      <TextField fx:id="goodWord" layoutX="406.0" layoutY="87.0" />
+      <Text layoutX="438.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good Letters" />
+      <TextField fx:id="badWord" layoutX="406.0" layoutY="142.0" />
+      <Text layoutX="450.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bad Letters" />
+      <Button layoutX="457.0" layoutY="184.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
+      <Text layoutX="23.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word So Far:" />
+      <TextField fx:id="letter1" editable="false" layoutX="98.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter4" editable="false" layoutX="170.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter3" editable="false" layoutX="146.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter2" editable="false" layoutX="122.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter7" editable="false" layoutX="240.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter6" editable="false" layoutX="216.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter5" editable="false" layoutX="192.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter8" editable="false" layoutX="265.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <TextField fx:id="letter9" editable="false" layoutX="288.0" layoutY="184.0" prefHeight="26.0" prefWidth="24.0" />
+      <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Word Must Be 9 Letters" wrappingWidth="175.3134765625" />
+      <Line endX="35.0" endY="36.0" layoutX="216.0" layoutY="32.0" startX="35.0" startY="18.5" />
+      <Line endX="-17.5" endY="18.5" layoutX="217.0" layoutY="34.0" startX="33.5" startY="16.0" />
+      <Line endX="-20.0" endY="14.0" layoutX="219.0" layoutY="38.0" startX="-20.0" startY="117.0" />
    </children>
 </Pane>

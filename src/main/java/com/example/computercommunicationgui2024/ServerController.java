@@ -199,6 +199,21 @@ goodWord.setText("");
 Win.setText("Put In Your New Word");
 GoodChar = " ";
 BadChar = " ";
+letter1.setText("");
+        letter2.setText("");
+        letter3.setText("");
+        letter4.setText("");
+        letter5.setText("");
+        letter6.setText("");
+        letter7.setText("");
+        letter8.setText("");
+        letter9.setText("");
+
+
+
+
+
+
     }
 
 

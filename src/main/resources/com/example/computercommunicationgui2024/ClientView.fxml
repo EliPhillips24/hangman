@@ -4,14 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computercommunicationgui2024.ClientController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computercommunicationgui2024.ClientController">
    <children>
-      <TextField fx:id="messageTyped" layoutX="14.0" layoutY="59.0" onAction="#sendMessage" prefHeight="25.0" prefWidth="504.0" promptText="message" />
-      <Button layoutX="540.0" layoutY="59.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
+      <Button layoutX="532.0" layoutY="32.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
       <TextField fx:id="From" layoutX="62.0" layoutY="27.0" prefHeight="25.0" prefWidth="192.0" />
       <TextField fx:id="To" layoutX="309.0" layoutY="28.0" prefHeight="25.0" prefWidth="208.0" />
       <Label layoutX="14.0" layoutY="32.0" text="From:" />
       <Label layoutX="284.0" layoutY="31.0" text="To:" />
+      <TextField fx:id="messageTyped" layoutX="14.0" layoutY="27.0" onAction="#sendMessage" prefHeight="35.0" prefWidth="507.0" promptText="message" />
+      <Text layoutX="31.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rules: 1)To win you must input the full word 2) If you are not putting in the full word just put in one letter 3) This is Caps senstive " wrappingWidth="507.0" />
    </children>
 </Pane>
